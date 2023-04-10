@@ -30,7 +30,7 @@ const AppSidebar = () => {
       }}
     >
       <CSidebarBrand className="d-none d-md-flex" to="/">
-        <h4>Lead Educare</h4>
+        <h4>Boi Ghor</h4>
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>

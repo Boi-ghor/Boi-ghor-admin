@@ -29,24 +29,7 @@ const _nav = [
       },
     ],
   },
-  {
-    component: CNavGroup,
-    name: 'Teacher',
-    to: '/teacher',
-    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Add Teacher',
-        to: '/teacher',
-      },
-      {
-        component: CNavItem,
-        name: 'All Teacher',
-        to: '/all-teacher',
-      },
-    ],
-  },  
+
   {
     component: CNavItem,
     name: 'All user',
@@ -54,11 +37,83 @@ const _nav = [
     icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
   },
   {
+    component: CNavGroup,
+    name: 'Category',
+    to: '/category',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Add Category',
+        to: '/create-category',
+      },
+      {
+        component: CNavItem,
+        name: 'All Category',
+        to: '/all-category',
+      },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Authors',
+    to: '/authors',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Add Author',
+        to: '/create-author',
+      },
+      {
+        component: CNavItem,
+        name: 'All Authors',
+        to: '/all-author',
+      },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Publishers',
+    to: '/publishers',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Add Publisher',
+        to: '/create-publisher',
+      },
+      {
+        component: CNavItem,
+        name: 'All Publishers',
+        to: '/all-publishers',
+      },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Books',
+    to: '/books',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Add Book',
+        to: '/create-Book',
+      },
+      {
+        component: CNavItem,
+        name: 'All Category',
+        to: '/all-category',
+      },
+    ],
+  },
+  {
     component: CNavItem,
     name: 'Setting',
     to: '/setting',
     icon: <CIcon icon={cilSettings} customClassName="nav-icon" />,
   }
-  
+
 ]
 export default _nav
