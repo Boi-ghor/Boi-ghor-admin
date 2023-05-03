@@ -1,14 +1,14 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState } from "react"
 
-const addAuthor = () => {
+
+
+const Publisher = () => {
 
   const [name, setName] = useState("")
   const [description, setDescription] = useState('')
   const [image, setImage] = useState(null);
   const [previewURL, setPreviewURL] = useState('');
   const fileInput = useRef(null);
-
-
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -46,17 +46,22 @@ const addAuthor = () => {
 
   }
 
+
+
   return (
     <>
-     <div className="container-fluid">
+
+
+      <div className="container-fluid">
         <div className="row">
           <div className="col-12">
             <div className="card">
               <div className="card-body">
                 <div className="row ">
-                  <div className="col-md-6">  <h5 >Add Author</h5></div>
-                  <div className="col-md-6 "> 
-                   {previewURL && (
+                  <div className="col-md-6">  <h5 >Add Publisher</h5></div>
+                  <div className="col-md-6 ">  
+                  
+                  {previewURL && (
                     <img src={previewURL}
                     className="float-end m-2"
                     alt="Preview" style={{
@@ -73,7 +78,7 @@ const addAuthor = () => {
 
 
                   <div className="col-6 p-2">
-                    <label className="form-label">Author Name</label>
+                    <label className="form-label">Publisher Name</label>
                     <input
                       className="form-control form-control-sm" type="text"
                       value={name}
@@ -85,6 +90,8 @@ const addAuthor = () => {
                   <div className="col-4">
                     <div class="mb-3">
                       <label for="formFile" class="form-label">Your Image</label>
+
+
 
                       <input
                         type="file"
@@ -123,9 +130,8 @@ const addAuthor = () => {
           </div>
         </div>
       </div>
-    
     </>
   )
 }
 
-export default addAuthor
+export default Publisher
