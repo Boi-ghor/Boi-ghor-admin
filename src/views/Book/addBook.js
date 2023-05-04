@@ -3,8 +3,10 @@ import DemoIMG from "../Book/Image/Demo_product.jpg"
 import { Select } from 'antd';
 
 const addBook = () => {
+     //
+    const [photo, setPhoto] = useState(null);
 
-
+//
 
      const [image, setImage] = useState(null);
      const [previewURL, setPreviewURL] = useState('');
