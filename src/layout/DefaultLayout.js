@@ -1,7 +1,19 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { AppContent, AppSidebar, AppHeader } from '../components/index'
-
+import {useAuth} from "../components/context/auth";
+import axios from "axios";
+const Login =React.lazy(()=> import('../views/page/login'))
 const DefaultLayout = () => {
+  const [ok,setOk]=useState(false)
+  const [auth,setAuth]=useAuth()
+  useEffect(()=>{
+    if(auth.token){
+
+      setOk(true)
+
+    }else(setOk(false))
+  },[auth])
+  if(!ok) return <Login></Login>
   return (
     <div>
       <AppSidebar />

@@ -12,6 +12,7 @@ import {
 } from "@coreui/react";
 import {FiEdit} from "react-icons/fi";
 import {RiDeleteBin5Fill} from "react-icons/ri";
+const img='https://dfb503wu29eo2.cloudfront.net/slir/h1200/png24-front/bookcover0010361.jpg'
 const users=[
   {
     name:"sohan",
@@ -46,12 +47,12 @@ const users=[
     gems:12
   },
 ]
-const Users = () => {
+const allBooks = () => {
   return (
     <div>
       <div className="card border-0 shadow-sm">
         <div className="card-body">
-          <h6 className="card-title">All User</h6>
+          <h6 className="card-title">All Books</h6>
           <div className="my-3 d-flex">
             <CFormInput
               placeholder="Search by title"
@@ -59,7 +60,7 @@ const Users = () => {
             />
           </div>
           <CTable>
-            <CTableHead>
+            <CTableHead style={{textAlign:"center"}} >
               <CTableRow style={{backgroundColor:'#dfe6e9'}}>
                 <CTableHeaderCell className="py-3" scope="col" style={{ fontSize: '14px' }}>
                   Id
@@ -68,25 +69,33 @@ const Users = () => {
                   Name
                 </CTableHeaderCell>
                 <CTableHeaderCell className="py-3" scope="col" style={{ fontSize: '14px' }}>
-                  Email
+                  image
                 </CTableHeaderCell>
                 <CTableHeaderCell className="py-3" scope="col" style={{ fontSize: '14px' }}>
-                  Role
+                  Category
+                </CTableHeaderCell>
+                <CTableHeaderCell className="py-3" scope="col" style={{ fontSize: '14px' }}>
+                  Price
                 </CTableHeaderCell>
 
+                <CTableHeaderCell className="py-3 text-center" scope="col" style={{ fontSize: '14px' }}>
+                  Quantity
+                </CTableHeaderCell>
                 <CTableHeaderCell className="py-3 text-center" scope="col" style={{ fontSize: '14px' }}>
                   Action
                 </CTableHeaderCell>
               </CTableRow>
             </CTableHead>
 
-            <CTableBody>
+            <CTableBody style={{textAlign:"center"}}>
               {users.map((user,key)=>{
                 return <CTableRow>
-                  <CTableDataCell style={{ fontSize: '14px', color: '#8E98AA' }}>{key+1}</CTableDataCell>
-                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}> {user.name}</CTableDataCell>
-                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}>{user.email}</CTableDataCell>
-                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}> <CBadge style={{ backgroundColor:'#34495e'}}>{user.role}</CBadge> </CTableDataCell>
+                  <CTableDataCell  style={{ fontSize: '14px', color: '#8E98AA' }}>{key+1}</CTableDataCell>
+                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}> gohin baluchor</CTableDataCell>
+                  <CTableDataCell style={{}}> <img  src={img} width={'50'} height={'40'} /> </CTableDataCell>
+                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}>love</CTableDataCell>
+                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}>10</CTableDataCell>
+                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}> {13} </CTableDataCell>
 
                   <CTableDataCell className="d-flex align-items-center  justify-content-center w-full">
 
@@ -117,4 +126,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default allBooks;

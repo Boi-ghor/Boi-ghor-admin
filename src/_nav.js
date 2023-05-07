@@ -103,15 +103,15 @@ const _nav = [
       },
       {
         component: CNavItem,
-        name: 'All Category',
-        to: '/all-category',
+        name: 'All Book',
+        to: '/all-book',
       },
     ],
   },
   {
     component: CNavItem,
-    name: 'Setting',
-    to: '/setting',
+    name: 'Settings',
+    to: '/settings',
     icon: <CIcon icon={cilSettings} customClassName="nav-icon" />,
   }
 
