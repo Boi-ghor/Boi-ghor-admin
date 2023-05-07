@@ -12,23 +12,24 @@ import {
 } from "@coreui/react";
 import {FiEdit} from "react-icons/fi";
 import {RiDeleteBin5Fill} from "react-icons/ri";
+const img='https://www.w3schools.com/css/paris.jpg'
 const users=[
   {
     name:"sohan",
     email:"sohan@gmail.com",
-    role:'user',
+    role:'admin',
     gems:12
   },
   {
     name:"sumit",
     email:"shakil@gmail.com",
-    role:'user',
+    role:'student',
     gems:15
   },
   {
     name:"dip",
     email:"dip@gmail.com",
-    role:'user',
+    role:'student',
     gems:12
   },
 
@@ -36,7 +37,7 @@ const users=[
   {
     name:"minhaj",
     email:"sohan@gmail.com",
-    role:'user',
+    role:'student',
     gems:12
   },
   {
@@ -46,19 +47,20 @@ const users=[
     gems:12
   },
 ]
-const Users = () => {
+
+const AllAuthor = () => {
   return (
     <div>
       <div className="card border-0 shadow-sm">
         <div className="card-body">
-          <h6 className="card-title">All User</h6>
+          <h6 className="card-title">All Authors</h6>
           <div className="my-3 d-flex">
             <CFormInput
               placeholder="Search by title"
               className="w-25"
             />
           </div>
-          <CTable>
+          <CTable style={{textAlign:'center'}}>
             <CTableHead>
               <CTableRow style={{backgroundColor:'#dfe6e9'}}>
                 <CTableHeaderCell className="py-3" scope="col" style={{ fontSize: '14px' }}>
@@ -67,13 +69,11 @@ const Users = () => {
                 <CTableHeaderCell className="py-3" scope="col" style={{ fontSize: '14px' }}>
                   Name
                 </CTableHeaderCell>
-                <CTableHeaderCell className="py-3" scope="col" style={{ fontSize: '14px' }}>
-                  Email
-                </CTableHeaderCell>
-                <CTableHeaderCell className="py-3" scope="col" style={{ fontSize: '14px' }}>
-                  Role
-                </CTableHeaderCell>
 
+
+                <CTableHeaderCell className="py-3" scope="col" style={{ fontSize: '14px' }}>
+                  Image
+                </CTableHeaderCell>
                 <CTableHeaderCell className="py-3 text-center" scope="col" style={{ fontSize: '14px' }}>
                   Action
                 </CTableHeaderCell>
@@ -85,9 +85,9 @@ const Users = () => {
                 return <CTableRow>
                   <CTableDataCell style={{ fontSize: '14px', color: '#8E98AA' }}>{key+1}</CTableDataCell>
                   <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}> {user.name}</CTableDataCell>
-                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}>{user.email}</CTableDataCell>
-                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}> <CBadge style={{ backgroundColor:'#34495e'}}>{user.role}</CBadge> </CTableDataCell>
 
+
+                  <CTableDataCell style={{}}> <img  src={img} width={'50'} /> </CTableDataCell>
                   <CTableDataCell className="d-flex align-items-center  justify-content-center w-full">
 
                     <CButton
@@ -117,4 +117,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default AllAuthor;

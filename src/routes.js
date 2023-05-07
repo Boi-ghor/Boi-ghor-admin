@@ -1,4 +1,8 @@
 import React from 'react'
+const AllPublishers =React.lazy(()=> import('./views/publisher/allPublisher'))
+const AllAuthor =React.lazy(()=> import('./views/author/allAuthor'))
+const AllBooks =React.lazy(()=> import('./views/Book/allBook'))
+const AllCategory =React.lazy(()=> import('./views/category/allCategory'))
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Settings = React.lazy(() => import('./views/Settings/Settings'))
 const Users = React.lazy(() => import('./views/users/Users'))
@@ -17,13 +21,18 @@ const routes = [
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/addblog', name: 'Add Blog', element: AddBlog },
   { path: '/allblog', name: 'All Blog', element: AllBlog },
-  { path: '/setting', name: 'settings', element:  Settings},
+  { path: '/settings', name: 'settings', element:  Settings},
   { path: '/all-user', name: 'All User', element: Users },
-  { path: '/teacher', name: 'Add Teacher', element: Teacher }, 
+  { path: '/teacher', name: 'Add Teacher', element: Teacher },
   { path: '/teacherdetails', name: 'Teacher Details', element: TeacherDetails },
   { path: '/create-category', name: 'addcategory', element:  Category},
   { path: '/create-author', name: 'createauthor', element: CreateAuthor },
   { path: '/create-publisher', name: 'createpublisher', element:  CreatePublisher},
   { path: '/create-Book', name: 'AddBook', element:  AddBook},
+  {path:'/all-publishers', name:'All Publishers',element:AllPublishers},
+  {path:"/all-author", name:"All Authors",element:AllAuthor},
+  {path:"/all-category", name:"All Category",element:AllCategory},
+  {path:"/all-book", name:"All Books",element:AllBooks},
 ]
+
 export default routes
