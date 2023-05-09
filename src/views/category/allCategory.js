@@ -15,40 +15,7 @@ import {RiDeleteBin5Fill} from "react-icons/ri";
 import axios from "axios";
 import {useCategory} from "../../components/context/category";
 const img='https://www.w3schools.com/css/paris.jpg'
-const users=[
-  {
-    name:"sohan",
-    email:"sohan@gmail.com",
-    role:'admin',
-    gems:12
-  },
-  {
-    name:"sumit",
-    email:"shakil@gmail.com",
-    role:'student',
-    gems:15
-  },
-  {
-    name:"dip",
-    email:"dip@gmail.com",
-    role:'student',
-    gems:12
-  },
 
-
-  {
-    name:"minhaj",
-    email:"sohan@gmail.com",
-    role:'student',
-    gems:12
-  },
-  {
-    name:"fahim",
-    email:"sohan@gmail.com",
-    role:'admin',
-    gems:12
-  },
-]
 const AllCategory = () => {
   const [category]=useCategory();
 console.log(category)

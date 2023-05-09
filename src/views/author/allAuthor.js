@@ -12,43 +12,13 @@ import {
 } from "@coreui/react";
 import {FiEdit} from "react-icons/fi";
 import {RiDeleteBin5Fill} from "react-icons/ri";
-const img='https://www.w3schools.com/css/paris.jpg'
-const users=[
-  {
-    name:"sohan",
-    email:"sohan@gmail.com",
-    role:'admin',
-    gems:12
-  },
-  {
-    name:"sumit",
-    email:"shakil@gmail.com",
-    role:'student',
-    gems:15
-  },
-  {
-    name:"dip",
-    email:"dip@gmail.com",
-    role:'student',
-    gems:12
-  },
+import {useAuthor} from "../../components/context/author";
 
-
-  {
-    name:"minhaj",
-    email:"sohan@gmail.com",
-    role:'student',
-    gems:12
-  },
-  {
-    name:"fahim",
-    email:"sohan@gmail.com",
-    role:'admin',
-    gems:12
-  },
-]
 
 const AllAuthor = () => {
+
+  const [author]=useAuthor();
+
   return (
     <div>
       <div className="card border-0 shadow-sm">
@@ -81,13 +51,13 @@ const AllAuthor = () => {
             </CTableHead>
 
             <CTableBody>
-              {users.map((user,key)=>{
+              {author.map((x,key)=>{
                 return <CTableRow>
                   <CTableDataCell style={{ fontSize: '14px', color: '#8E98AA' }}>{key+1}</CTableDataCell>
-                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}> {user.name}</CTableDataCell>
+                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}> {x.authorName}</CTableDataCell>
 
 
-                  <CTableDataCell style={{}}> <img  src={img} width={'50'} /> </CTableDataCell>
+                  <CTableDataCell style={{}}> <img  src={x.photoURL} width={'50'} /> </CTableDataCell>
                   <CTableDataCell className="d-flex align-items-center  justify-content-center w-full">
 
                     <CButton

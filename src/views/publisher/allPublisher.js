@@ -1,4 +1,5 @@
 import React from 'react';
+import {useNavigate}from 'react-router-dom'
 import {
   CBadge,
   CButton,
@@ -12,42 +13,12 @@ import {
 } from "@coreui/react";
 import {FiEdit} from "react-icons/fi";
 import {RiDeleteBin5Fill} from "react-icons/ri";
-const img='https://www.w3schools.com/css/paris.jpg'
-const users=[
-  {
-    name:"sohan",
-    email:"sohan@gmail.com",
-    role:'admin',
-    gems:12
-  },
-  {
-    name:"sumit",
-    email:"shakil@gmail.com",
-    role:'student',
-    gems:15
-  },
-  {
-    name:"dip",
-    email:"dip@gmail.com",
-    role:'student',
-    gems:12
-  },
+import {usePublisher} from "../../components/context/publisher";
 
 
-  {
-    name:"minhaj",
-    email:"sohan@gmail.com",
-    role:'student',
-    gems:12
-  },
-  {
-    name:"fahim",
-    email:"sohan@gmail.com",
-    role:'admin',
-    gems:12
-  },
-]
 const AllPublishers = () => {
+  const navigate=useNavigate()
+  const [publisher]=usePublisher()
   return (
     <div>
       <div className="card border-0 shadow-sm">
@@ -80,17 +51,17 @@ const AllPublishers = () => {
             </CTableHead>
 
             <CTableBody>
-              {users.map((user,key)=>{
+              {publisher.map((x,key)=>{
                 return <CTableRow>
                   <CTableDataCell style={{ fontSize: '14px', color: '#8E98AA' }}>{key+1}</CTableDataCell>
-                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}> {user.name}</CTableDataCell>
+                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}> {x.publisherName}</CTableDataCell>
 
 
-                  <CTableDataCell style={{}}> <img  src={img} width={'50'} /> </CTableDataCell>
+                  <CTableDataCell style={{}}> <img  src={x.photoURL} width={'40'} height={'40'} /> </CTableDataCell>
                   <CTableDataCell className="d-flex align-items-center  justify-content-center w-full">
 
                     <CButton
-                      // onClick={() => onDelete(blog?.blogID)}
+                      onClick={() => navigate(`/publisher/${x._id}`)}
                       className=" border-0 cursor-pointer me-2 delete_btn_hover"
                       style={{ color: '#ecf0f1',backgroundColor:"#20bf6b" }}
                     >
