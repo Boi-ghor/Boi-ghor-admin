@@ -35,6 +35,8 @@ const Login = () => {
         setAuth({ ...auth, token: data.token, user: data.user });
         navigate('/')
         console.log("success")
+      }else{
+
       }
     }
     catch (e) {
