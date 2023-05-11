@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   CBadge,
   CButton,
@@ -12,6 +12,7 @@ import {
 } from "@coreui/react";
 import {FiEdit} from "react-icons/fi";
 import {RiDeleteBin5Fill} from "react-icons/ri";
+import axios from "axios";
 const img='https://dfb503wu29eo2.cloudfront.net/slir/h1200/png24-front/bookcover0010361.jpg'
 const users=[
   {
@@ -48,6 +49,11 @@ const users=[
   },
 ]
 const allBooks = () => {
+  const [books,setBooks]=useState([]);
+  console.log(books)
+  useEffect(()=>{
+    axios.get('/books').then(data => setBooks(data.data))
+  },[])
   return (
     <div>
       <div className="card border-0 shadow-sm">
@@ -88,14 +94,14 @@ const allBooks = () => {
             </CTableHead>
 
             <CTableBody style={{textAlign:"center"}}>
-              {users.map((user,key)=>{
+              {books.map((book,key)=>{
                 return <CTableRow>
                   <CTableDataCell  style={{ fontSize: '14px', color: '#8E98AA' }}>{key+1}</CTableDataCell>
-                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}> gohin baluchor</CTableDataCell>
-                  <CTableDataCell style={{}}> <img  src={img} width={'50'} height={'40'} /> </CTableDataCell>
-                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}>love</CTableDataCell>
-                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}>10</CTableDataCell>
-                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}> {13} </CTableDataCell>
+                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}> {book.bookName}</CTableDataCell>
+                  <CTableDataCell style={{}}> <img  src={book.photoURL} width={'50'} height={'40'} /> </CTableDataCell>
+                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}>{book.category[0].name}</CTableDataCell>
+                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}>{book.price}</CTableDataCell>
+                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}> {book.quantity} </CTableDataCell>
 
                   <CTableDataCell className="d-flex align-items-center  justify-content-center w-full">
 

@@ -4,7 +4,7 @@ const categoryContext=createContext()
 const CategoryProvider = ({children}) => {
   const [category,setCategory]=useState([])
   useEffect(()=>{
-    axios.get('https://boi-ghor.onrender.com/api/v1/categories').then(data=>setCategory(data.data.category))
+    axios.get('categories').then(data=>setCategory(data.data.category))
   },[])
   return (
   < categoryContext.Provider value={[category]}>

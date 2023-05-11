@@ -12,13 +12,13 @@ const AuthProvider = ({ children }) => {
   // axios config
   axios.defaults.baseURL = process.env.REACT_APP_API;
 console.log(process.env.REACT_APP_API)
-  axios.defaults.headers.common["token"] = auth?.token;
+  axios.defaults.headers.common["Authorization"] = auth?.token;
 
   useEffect(() => {
     const data = localStorage.getItem("auth");
     if (data) {
       const parsed = JSON.parse(data);
-      setAuth({ ...auth, user: parsed.data, token: parsed.token });
+      setAuth({ ...auth, user: parsed.user, token: parsed.token });
 
     }
   }, []);

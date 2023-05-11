@@ -1,7 +1,11 @@
 import React, { useRef, useState } from 'react'
+import {useNavigate}from 'react-router-dom'
+import {useAuth} from "../../components/context/auth";
+import axios from "axios";
 
 const addAuthor = () => {
-
+  const navigate=useNavigate()
+  const [auth,setAuth]=useAuth()
   const [name, setName] = useState("")
   const [description, setDescription] = useState('')
   const [image, setImage] = useState(null);
@@ -11,6 +15,7 @@ const addAuthor = () => {
 
 
   const handleImageChange = (event) => {
+
     const file = event.target.files[0];
     if (file) {
       setImage(file);
@@ -23,21 +28,31 @@ const addAuthor = () => {
   const SaveChange = async (e) => {
     e.preventDefault()
     const formData = new FormData();
-    formData.append('image', image);
+    formData.append('authorName',name);
+    formData.append('photo', image);
+    formData.append('aboutAuthor',description);
+
 
 
 
     try {
 
 
-      if (!name) {
-        alert('Name is required');
+      if (!name && !image) {
+        alert('Name or image required');
       }
 
 
       else {
-        
-        console.log(name, image, description)
+
+       if(auth?.token){
+         axios.post('/createAuthor',formData).then(data=> {
+           if(data?.data?.data){
+             console.log(data)
+             navigate('/all-author')
+           }
+         }).catch(e=> console.log(e))
+       }
 
       }
 
@@ -55,7 +70,7 @@ const addAuthor = () => {
               <div className="card-body">
                 <div className="row ">
                   <div className="col-md-6">  <h5 >Add Author</h5></div>
-                  <div className="col-md-6 "> 
+                  <div className="col-md-6 ">
                    {previewURL && (
                     <img src={previewURL}
                     className="float-end m-2"
@@ -123,7 +138,7 @@ const addAuthor = () => {
           </div>
         </div>
       </div>
-    
+
     </>
   )
 }

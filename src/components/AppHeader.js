@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import {Link, NavLink,} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   CContainer,
@@ -15,13 +15,21 @@ import CIcon from '@coreui/icons-react'
 import { cilBell, cilEnvelopeOpen, cilList, cilMenu } from '@coreui/icons'
 
 import { AppBreadcrumb } from './index'
-import { AppHeaderDropdown } from './header/index'
+
 import { logo } from 'src/assets/brand/logo'
+import {useAuth} from "./context/auth";
 
 const AppHeader = () => {
+  const [auth,setAuth]=useAuth();
+  console.log(auth)
+  const name=auth?.user?.firstName;
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
+  const logout =()=>{
+    localStorage.removeItem('auth');
 
+    window.location.href="/"
+  }
   return (
     <CHeader position="sticky" className="mb-4">
       <CContainer fluid>
@@ -41,31 +49,16 @@ const AppHeader = () => {
             </CNavLink>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="#">Users</CNavLink>
+           <h1 className={'p-2'}>{name}</h1>
           </CNavItem>
-          <CNavItem>
-            <CNavLink href="#">Settings</CNavLink>
-          </CNavItem>
+
         </CHeaderNav>
         <CHeaderNav>
-          <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilBell} size="lg" />
-            </CNavLink>
-          </CNavItem>
-          <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilList} size="lg" />
-            </CNavLink>
-          </CNavItem>
-          <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilEnvelopeOpen} size="lg" />
-            </CNavLink>
-          </CNavItem>
+
+
         </CHeaderNav>
         <CHeaderNav className="ms-3">
-          <AppHeaderDropdown />
+          { auth?.token ? <button onClick={logout} className={'btn btn-link'}>logout</button> : <Link className={'btn btn-link'}>LogIn</Link>}
         </CHeaderNav>
       </CContainer>
       <CHeaderDivider />

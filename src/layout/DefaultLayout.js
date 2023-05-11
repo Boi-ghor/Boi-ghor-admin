@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import { AppContent, AppSidebar, AppHeader } from '../components/index'
+import {useNavigate} from 'react-router-dom'
 import {useAuth} from "../components/context/auth";
 import axios from "axios";
 const Login =React.lazy(()=> import('../views/page/login'))
 const DefaultLayout = () => {
+  const navigate=useNavigate()
   const [ok,setOk]=useState(false)
   const [auth,setAuth]=useAuth()
   useEffect(()=>{
@@ -13,7 +15,7 @@ const DefaultLayout = () => {
 
     }else(setOk(false))
   },[auth])
-  if(!ok) return <Login></Login>
+  if(!ok)  navigate('/login')
   return (
     <div>
       <AppSidebar />

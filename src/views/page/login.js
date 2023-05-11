@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import axios from "axios";
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import {
   CButton,
   CCard,
@@ -19,6 +19,7 @@ import { cilLockLocked, cilUser } from '@coreui/icons'
 import {useAuth} from "../../components/context/auth";
 
 const Login = () => {
+  const navigate=useNavigate()
   const [auth,setAuth]=useAuth()
   const [loading,setLoading]=useState(false)
   const [email,setEmail]=useState('')
@@ -31,8 +32,11 @@ const Login = () => {
       if(data.user.role===1){
         setLoading(false)
         localStorage.setItem("auth", JSON.stringify(data));
-        setAuth({ ...auth, token: data.token, user: data.data });
+        setAuth({ ...auth, token: data.token, user: data.user });
+        navigate('/')
         console.log("success")
+      }else{
+
       }
     }
     catch (e) {
