@@ -3,6 +3,8 @@ import { AppContent, AppSidebar, AppHeader } from '../components/index'
 import {useNavigate} from 'react-router-dom'
 import {useAuth} from "../components/context/auth";
 import axios from "axios";
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer} from "react-toastify";
 const Login =React.lazy(()=> import('../views/page/login'))
 const DefaultLayout = () => {
   const navigate=useNavigate()
@@ -15,9 +17,12 @@ const DefaultLayout = () => {
 
     }else(setOk(false))
   },[auth])
-  if(!ok)  navigate('/login')
+  if(!ok) {
+    return navigate('/login')
+  }else{
   return (
     <div>
+
       <AppSidebar />
       <div className="wrapper d-flex flex-column min-vh-100 bg-light">
         <AppHeader />
@@ -25,8 +30,9 @@ const DefaultLayout = () => {
           <AppContent />
         </div>
       </div>
+
     </div>
   )
-}
+}}
 
 export default DefaultLayout

@@ -1,6 +1,7 @@
 import React, { Component, Suspense } from 'react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import './scss/style.scss'
+import {ToastContainer} from "react-toastify";
 
 
 const loading = (
@@ -19,10 +20,12 @@ class App extends Component {
     return (
       <HashRouter>
         <Suspense fallback={loading}>
+
           <Routes>
             <Route exact path="/login" name="Login Page" element={<Login />} />
             <Route path="*" name="Home" element={<DefaultLayout />} />
           </Routes>
+
         </Suspense>
       </HashRouter>
     )

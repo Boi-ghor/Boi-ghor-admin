@@ -12,13 +12,16 @@ import {AuthProvider} from './components/context/auth'
 import {CategoryProvider}from './components/context/category'
 import {PublisherProvider}from './components/context/publisher'
 import {AuthorProvider}from './components/context/author'
+import {ToastContainer} from "react-toastify";
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
   <AuthProvider>
     <CategoryProvider>
      <PublisherProvider>
        <AuthorProvider>
+
     <App />
+
        </AuthorProvider>
      </PublisherProvider>
     </CategoryProvider>

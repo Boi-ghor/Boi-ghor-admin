@@ -29,13 +29,16 @@ const Publisher = () => {
     try {
 
 
-      if (!name) {
-        toast.error('Name is required');
+
+      if (!name || !image || !description) {
+        alert('Name is required');
+
+      
       }
 
 
       else {
-        
+
         console.log(name, image, description)
 
       }
@@ -58,8 +61,8 @@ const Publisher = () => {
               <div className="card-body">
                 <div className="row ">
                   <div className="col-md-6">  <h5 >Add Publisher</h5></div>
-                  <div className="col-md-6 ">  
-                  
+                  <div className="col-md-6 ">
+
                   {previewURL && (
                     <img src={previewURL}
                     className="float-end m-2"

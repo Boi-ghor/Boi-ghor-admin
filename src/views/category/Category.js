@@ -2,11 +2,17 @@ import React, { useRef, useState } from 'react';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import { toast } from 'react-toastify';
 import DemoIMG from "../Book/Image/Demo_product.jpg"
+import {useAuth} from "../../components/context/auth";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 
 
 const Category = () => {
-
+  const navigate=useNavigate()
+    const [auth]=useAuth();
+    const [error,setError]=useState('')
+    const [loading ,setLoading]=useState(false)
      const [name, setName] = useState("")
      const [image, setImage] = useState(null);
      const [previewURL, setPreviewURL] = useState('');
@@ -17,7 +23,7 @@ const Category = () => {
           setSelectedImage(e.target.files[0]);
           const file = e.target.files[0];
 
-          
+
 
           if (file) {
                setImage(file);
@@ -38,15 +44,29 @@ const Category = () => {
 
 
                else {
-                    alert('success')
-                    console.log(name, image)
+                 setLoading(true)
+                 const formData = new FormData();
+                 formData.append('name',name);
+                 formData.append('photo', image);
+                 if(auth?.token){
+                   axios.post('/category',formData).then(data=>{
+                    if(data?.status===201){
+                        setLoading(false)
+                      navigate('/all-category')
+                      window.location.reload()
+                    }else{
+                      setLoading(false)
+                      setError("this category already created or something wrong")
+                    }
+                   })
+                 }
                }
 
 
 
           } catch (err) {
                console.log(err);
-               toast.error("Product create failed. Try again.");
+               setError("something wrong")
           }
      }
 
@@ -55,6 +75,7 @@ const Category = () => {
             <div className="container">
                <div className="row card p-3">
                     <h3 className='p-3 mt-2 mb-2 h4'> Add Category</h3>
+                    <p className={'text-danger'}>{error}</p>
 
                     <div class="row align-items-start">
                          <div class="col">
@@ -88,7 +109,7 @@ const Category = () => {
                                    </div>
 
 
-                                   <button className="btn btn-primary mt-2 w-25" type='submit'>
+                                   <button disabled={loading} className="btn btn-primary mt-2 w-25" type='submit'>
                                         Submit
                                    </button>
 
@@ -100,40 +121,40 @@ const Category = () => {
                          <div class="col">
                          <div className="col-4 align-self center">
                     {selectedImage ? (
-        <img 
+        <img
         className='mx-auto d-block '
 
-       
+
 
         style={{
-          
+
           "height": "100%",
           "width": "100%",
           "background-color": "#bbb",
           "border-radius": "15px",
           "display": "inline-block"}}
-        
-        
-        src={URL.createObjectURL(selectedImage)} alt="Selected Image" 
-        
-        
+
+
+        src={URL.createObjectURL(selectedImage)} alt="Selected Image"
+
+
         />
       ) : (
-          <img 
+          <img
           className='mx-auto d-block'
-  
+
           style={{
-            
+
           "height": "90%",
           "width": "90%",
           "background-color": "#bbb",
           "border-radius": "15px",
           "display": "inline-block"}}
-          
-          
-          src={DemoIMG} 
-          
-          
+
+
+          src={DemoIMG}
+
+
           />
       )}
                     </div>
@@ -149,7 +170,8 @@ const Category = () => {
 
 
 
-
 export default Category
 
-// hellow 
+
+
+
