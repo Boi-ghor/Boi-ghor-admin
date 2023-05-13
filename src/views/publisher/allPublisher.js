@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useNavigate}from 'react-router-dom'
 import {
   CBadge,
@@ -18,17 +18,20 @@ import {usePublisher} from "../../components/context/publisher";
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2'
 import axios from 'axios';
+import {useAuth} from "../../components/context/auth";
 
 
 const AllPublishers = () => {
+  const [error,setError]=useState('')
   const navigate=useNavigate()
-  const [publisher]=usePublisher()
+  const [publisher]=usePublisher();
+  const [auth]=useAuth()
 
 
-  const  DeleteConfim=(publisherName)=>{
-   
+  const  DeleteConfirm=(publisherName)=>{
 
-    
+
+
     return  Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -39,12 +42,26 @@ const AllPublishers = () => {
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.isConfirmed) {
-          
-          const{data}= axios.delete("/deletePublisher",publisherName)
-       
-         console.log(data)
+            console.log(publisherName)
+          const data={
+              publisherName
+          }
+         if(auth?.token){
+           axios.delete("/deletePublisher",{data})
+             .then(data=>{
 
-         
+              if(data?.data?.success){
+                window.location.reload()
+              }else{
+                  setError("this publisher have a book or something wrong")
+              }
+             })
+             .catch(e=> console.log(e))
+         }
+
+
+
+
 
         }
     })
@@ -57,6 +74,7 @@ const AllPublishers = () => {
       <div className="card border-0 shadow-sm">
         <div className="card-body">
           <h6 className="card-title">All Publishers</h6>
+          <p className={'text-danger'}>{error}</p>
           <div className="my-3 d-flex">
             <CFormInput
               placeholder="Search by title"
@@ -103,7 +121,7 @@ const AllPublishers = () => {
                       <FiEdit />
                     </CButton>
                     <CButton
-                       onClick={DeleteConfim.bind(this,x.publisherName)}
+                       onClick={()=>DeleteConfirm(x.publisherName)}
                       className=" border-0 cursor-pointer delete_btn_hover"
                       style={{ color: '#ecf0f1',backgroundColor:"red" }}
                     >

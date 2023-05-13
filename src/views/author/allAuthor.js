@@ -18,6 +18,7 @@ import {useAuthor} from "../../components/context/author";
 const AllAuthor = () => {
 
   const [author]=useAuthor();
+  console.log(author)
 
   return (
     <div>
