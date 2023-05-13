@@ -29,14 +29,17 @@ const Login = () => {
     try{
       setLoading(true)
       const {data}=await axios.post('https://boi-ghor.onrender.com/api/v1/signin',{email,password})
-      if(data.user.role===1){
+      console.log(data)
+      if(data?.user?.role===1){
+
         setLoading(false)
         localStorage.setItem("auth", JSON.stringify(data));
         setAuth({ ...auth, token: data.token, user: data.user });
         navigate('/')
         console.log("success")
-      }else{
-
+      }else if(data?.message){
+        setLoading(false)
+        alert('email or password not match')
       }
     }
     catch (e) {
