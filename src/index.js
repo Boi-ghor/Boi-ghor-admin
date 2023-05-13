@@ -4,6 +4,7 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'antd/dist/reset.css';
 import { Provider } from 'react-redux'
 import store from './store'

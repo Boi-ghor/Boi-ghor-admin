@@ -10,6 +10,7 @@ import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 
 const addBook = () => {
+
   const navigate=useNavigate();
 const [auth]=useAuth()
   const[categories]=useCategory();
@@ -17,13 +18,15 @@ const [auth]=useAuth()
   const [publishers]=usePublisher()
     const [loading,setLoading]=useState(false)
 
+
      const [image, setImage] = useState(null);
      const [previewURL, setPreviewURL] = useState('');
      const [selectedImage, setSelectedImage] = useState(null);
      const fileInput = useRef(null);
 
-     const [name,setName]=useState("")
-     const [price,setPrice]=useState("")
+     const [name,setName]=useState("") 
+     const [price,setPrice]=useState("") 
+
      const [quantity,setQuantity]=useState("")
      const [author,setAuthor]=useState("")
      const [publisher,setPublisher]=useState("")

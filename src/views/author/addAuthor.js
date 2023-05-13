@@ -33,8 +33,6 @@ const addAuthor = () => {
     formData.append('aboutAuthor',description);
 
 
-
-
     try {
 
 
