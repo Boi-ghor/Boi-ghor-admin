@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react"
+import { toast } from "react-toastify";
 
 
 
@@ -24,14 +25,12 @@ const Publisher = () => {
     e.preventDefault()
     const formData = new FormData();
     formData.append('image', image);
-
-
-
+    
     try {
 
 
       if (!name) {
-        alert('Name is required');
+        toast.error('Name is required');
       }
 
 

@@ -11,14 +11,47 @@ import {
   CTableHeaderCell,
   CTableRow
 } from "@coreui/react";
+
 import {FiEdit} from "react-icons/fi";
 import {RiDeleteBin5Fill} from "react-icons/ri";
 import {usePublisher} from "../../components/context/publisher";
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2'
+import axios from 'axios';
 
 
 const AllPublishers = () => {
   const navigate=useNavigate()
   const [publisher]=usePublisher()
+
+
+  const  DeleteConfim=(publisherName)=>{
+   
+
+    
+    return  Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+          
+          const{data}= axios.delete("/deletePublisher",publisherName)
+       
+         console.log(data)
+
+         
+
+        }
+    })
+
+}
+
+
   return (
     <div>
       <div className="card border-0 shadow-sm">
@@ -52,23 +85,25 @@ const AllPublishers = () => {
 
             <CTableBody>
               {publisher.map((x,key)=>{
+                {console.log(x)}
                 return <CTableRow>
                   <CTableDataCell style={{ fontSize: '14px', color: '#8E98AA' }}>{key+1}</CTableDataCell>
-                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}> {x.publisherName}</CTableDataCell>
+                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}>
+                     {x.publisherName}</CTableDataCell>
 
 
                   <CTableDataCell style={{}}> <img  src={x.photoURL} width={'40'} height={'40'} /> </CTableDataCell>
                   <CTableDataCell className="d-flex align-items-center  justify-content-center w-full">
 
                     <CButton
-                      onClick={() => navigate(`/publisher/${x._id}`)}
+                      onClick={() => navigate(`/all-publishers/${x.publisherName}`)}
                       className=" border-0 cursor-pointer me-2 delete_btn_hover"
                       style={{ color: '#ecf0f1',backgroundColor:"#20bf6b" }}
                     >
                       <FiEdit />
                     </CButton>
                     <CButton
-                      // onClick={() => onDelete(blog?.blogID)}
+                       onClick={DeleteConfim.bind(this,x.publisherName)}
                       className=" border-0 cursor-pointer delete_btn_hover"
                       style={{ color: '#ecf0f1',backgroundColor:"red" }}
                     >
