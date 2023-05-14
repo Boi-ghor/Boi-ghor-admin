@@ -33,13 +33,14 @@ const Category = () => {
      }
 
 
-
-     const Submit = async (e) => {
+/// update nAME WORKING  
+//PHOTO UPDATE NOT WORK
+ const Submit = async (e) => {
           e.preventDefault();
 
           try {
                if (!name) {
-                    alert('Name is required');
+                    toast.error('Name is required');
                }
 
 
@@ -51,7 +52,9 @@ const Category = () => {
                  if(auth?.token){
                    axios.post('/category',formData).then(data=>{
                     if(data?.status===201){
+
                         setLoading(false)
+                        
                       navigate('/all-category')
                       window.location.reload()
                     }else{

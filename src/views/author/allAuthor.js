@@ -13,12 +13,67 @@ import {
 import {FiEdit} from "react-icons/fi";
 import {RiDeleteBin5Fill} from "react-icons/ri";
 import {useAuthor} from "../../components/context/author";
+import Swal from 'sweetalert2';
+import { useAuth } from 'src/components/context/auth';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 
 const AllAuthor = () => {
 
   const [author]=useAuthor();
-  console.log(author)
+  const [auth]=useAuth();
+  const navigate=useNavigate()
+
+
+  const  DeleteConfirm=(authorName)=>{
+
+    return  Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+           
+          const data={
+              authorName
+          }
+         if(auth?.token){
+           axios.delete("/deleteAuthor",{data})
+             .then(data=>{
+
+              if(data?.data?.success){
+                toast.success("Author Delete Sucess")
+                window.location.reload()
+                
+
+              }else{
+                toast.error("This Author have a book or something wrong")
+                  //setError("this Author have a book or something wrong")
+              }
+             })
+             .catch(e=> console.log(e))
+         }
+
+
+
+
+
+        }
+    })
+
+}
+  
+const EditAuthor=async(id)=>{
+
+  navigate("/all-author/"+id)
+  
+  }
 
   return (
     <div>
@@ -63,6 +118,7 @@ const AllAuthor = () => {
 
                     <CButton
                       // onClick={() => onDelete(blog?.blogID)}
+                      onClick={()=>EditAuthor(x._id)}
                       className=" border-0 cursor-pointer me-2 delete_btn_hover"
                       style={{ color: '#ecf0f1',backgroundColor:"#20bf6b" }}
                     >
@@ -70,6 +126,7 @@ const AllAuthor = () => {
                     </CButton>
                     <CButton
                       // onClick={() => onDelete(blog?.blogID)}
+                      onClick={()=>DeleteConfirm(x.authorName)}
                       className=" border-0 cursor-pointer delete_btn_hover"
                       style={{ color: '#ecf0f1',backgroundColor:"red" }}
                     >

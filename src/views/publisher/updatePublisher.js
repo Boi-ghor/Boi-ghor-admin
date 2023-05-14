@@ -1,27 +1,34 @@
 import axios from 'axios';
-import React, { useRef, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useAuth } from 'src/components/context/auth';
 
 
 const updatePublisher = () => {
-
+  const [auth]=useAuth();
      const [name, setName] = useState("")
      const [description, setDescription] = useState('')
      const [image, setImage] = useState(null);
      const [previewURL, setPreviewURL] = useState('');
      const fileInput = useRef(null);
-
+     const navigate=useNavigate()
      const {id}=useParams()
 
-
+     useEffect(()=>{
+      LoadData()
+     },[])
      const LoadData=async()=>{
 
      
           try{
               
-               const { data } = await axios.post(`/publishers/${id}`);
+               const { data } = await axios.get(`/publishers/${id}`);
 
-               console.log(data)
+               setName(data.data.publisherName);
+               setDescription(data.data.aboutPublisher);
+               setPreviewURL(data.data.photoURL);
+               setImage(data.data.photoURL);
 
 
           }
@@ -31,7 +38,7 @@ const updatePublisher = () => {
           }
      }
 
-     LoadData()
+    
 
    
      const handleImageChange = (event) => {
@@ -44,31 +51,46 @@ const updatePublisher = () => {
      }
    
    
-     const SaveChange = async (e) => {
-       e.preventDefault()
-       const formData = new FormData();
-       formData.append('image', image);
-       
-       try {
-   
-   
-         if (!name) {
-           toast.error('Name is required');
-         }
-   
-   
-         else {
-           
-           console.log(name, image, description)
-   
-         }
-   
-       }
-       catch (error) { }
+  const SaveChange = async (e) => {
+      
+      e.preventDefault()
+      const formData = new FormData();
+      formData.append('publisherName',name);
+      formData.append('photo',image);
+      formData.append('aboutPublisher',description);
+  
+  
+      try {
+  
+  
+        if (!name && !image) {
+          toast.error('Name or image required');
+        }
+        else{
+
+          if(auth?.token){
+            const {data}=await axios.post(`/updatePublisher/${id}`,formData)
+        
+            if(data.success==true){
+              toast.success("Publisher Update Sucess")
+              navigate("/all-publishers")
+            }
+            
+          }
+          else{
+            toast.error("SomeThing Went Wrong")
+          }
+         
+
+        }
+  
+  
+      
+  
+      }
+      catch (error) { }
    
      }
-   
-   
    
      return (
        <>
@@ -153,6 +175,9 @@ const updatePublisher = () => {
            </div>
          </div>
        </>
+
+    
+      
      )
    }
 export default updatePublisher

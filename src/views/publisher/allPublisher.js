@@ -114,7 +114,7 @@ const AllPublishers = () => {
                   <CTableDataCell className="d-flex align-items-center  justify-content-center w-full">
 
                     <CButton
-                      onClick={() => navigate(`/all-publishers/${x.publisherName}`)}
+                      onClick={() => navigate(`/all-publishers/${x._id}`)}
                       className=" border-0 cursor-pointer me-2 delete_btn_hover"
                       style={{ color: '#ecf0f1',backgroundColor:"#20bf6b" }}
                     >

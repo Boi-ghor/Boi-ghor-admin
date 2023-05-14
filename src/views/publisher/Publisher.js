@@ -1,10 +1,15 @@
+import axios from "axios";
 import React, { useRef, useState } from "react"
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useAuth } from "src/components/context/auth";
 
 
 
 const Publisher = () => {
 
+  const navigate=useNavigate()
+  const [auth,setAuth]=useAuth()
   const [name, setName] = useState("")
   const [description, setDescription] = useState('')
   const [image, setImage] = useState(null);
@@ -22,31 +27,46 @@ const Publisher = () => {
 
 
   const SaveChange = async (e) => {
+
+  
     e.preventDefault()
     const formData = new FormData();
-    formData.append('image', image);
+    formData.append('publisherName',name);
+    formData.append('photo', image);
+    formData.append('aboutPublisher',description);
     
-    try {
+  try {
 
 
+    if (!name && !image && !description) {
+      toast.error('Name , image and description required');
+    }
 
-      if (!name || !image || !description) {
-        alert('Name is required');
 
-      
+    else {
+
+      if(auth?.token){
+        const {data}=await axios.post("/createPublisher",formData)
+
+        if(data.success==true){
+          toast.success("Publisher Create Sucess")
+          navigate("/all-publishers")
+        }
+        
       }
-
-
-      else {
-
-        console.log(name, image, description)
-
+      else{
+        toast.error("SomeThing Went Wrong")
       }
+     
+   
+
 
     }
-    catch (error) { }
 
   }
+  catch (error) { }
+
+}
 
 
 

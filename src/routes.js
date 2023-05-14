@@ -1,7 +1,7 @@
 import React from 'react'
 import updateAuthor from './views/author/updateAuthor'
-import { useParams } from 'react-router-dom'
 import updatePublisher from './views/publisher/updatePublisher'
+import updateCategory from './views/category/updateCategory'
 const AllPublishers =React.lazy(()=> import('./views/publisher/allPublisher'))
 const AllAuthor =React.lazy(()=> import('./views/author/allAuthor'))
 const AllBooks =React.lazy(()=> import('./views/Book/allBook'))
@@ -35,8 +35,9 @@ const routes = [
   {path:'/all-publishers', name:'All Publishers',element:AllPublishers},
   {path:"/all-publishers/:id",element:updatePublisher},
   {path:"/all-author", name:"All Authors",element:AllAuthor},
-  {path:"/update-author/:id",element:updateAuthor},
+  {path:"/all-author/:id",element:updateAuthor},
   {path:"/all-category", name:"All Category",element:AllCategory},
+  {path:"/all-category/:id",element:updateCategory},
   {path:"/all-book", name:"All Books",element:AllBooks},
 ]
 
