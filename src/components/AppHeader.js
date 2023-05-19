@@ -18,6 +18,7 @@ import { AppBreadcrumb } from './index'
 
 import { logo } from 'src/assets/brand/logo'
 import {useAuth} from "./context/auth";
+import {toast} from "react-toastify";
 
 const AppHeader = () => {
   const [auth,setAuth]=useAuth();
@@ -27,8 +28,8 @@ const AppHeader = () => {
   const sidebarShow = useSelector((state) => state.sidebarShow)
   const logout =()=>{
     localStorage.removeItem('auth');
-
-    window.location.href="/"
+ toast.success("logout success")
+    window.location.href="/#/login"
   }
   return (
     <CHeader position="sticky" className="mb-4">

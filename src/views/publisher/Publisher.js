@@ -9,7 +9,8 @@ import { useAuth } from "src/components/context/auth";
 const Publisher = () => {
 
   const navigate=useNavigate()
-  const [auth,setAuth]=useAuth()
+  const [auth,setAuth]=useAuth();
+  const [loading ,setLoading]=useState(false)
   const [name, setName] = useState("")
   const [description, setDescription] = useState('')
   const [image, setImage] = useState(null);
@@ -28,13 +29,13 @@ const Publisher = () => {
 
   const SaveChange = async (e) => {
 
-  
+setLoading(true)
     e.preventDefault()
     const formData = new FormData();
     formData.append('publisherName',name);
     formData.append('photo', image);
     formData.append('aboutPublisher',description);
-    
+
   try {
 
 
@@ -49,22 +50,27 @@ const Publisher = () => {
         const {data}=await axios.post("/createPublisher",formData)
 
         if(data.success==true){
+          setLoading(false)
           toast.success("Publisher Create Sucess")
-          navigate("/all-publishers")
+          navigate("/all-publishers");
+          window.location.reload()
         }
-        
+
       }
       else{
-        toast.error("SomeThing Went Wrong")
+        toast.error("cannot created")
+        setLoading(false)
       }
-     
-   
+
+
 
 
     }
 
   }
-  catch (error) { }
+  catch (error) {
+    setLoading(false)
+    toast.error(error.message) }
 
 }
 
@@ -75,6 +81,8 @@ const Publisher = () => {
 
 
       <div className="container-fluid">
+        {loading ? <div className="spinner-border" role="status">
+        </div> : ""}
         <div className="row">
           <div className="col-12">
             <div className="card">
@@ -144,7 +152,7 @@ const Publisher = () => {
                 </div>
                 <div className="row">
                   <div className="col-4 p-2">
-                    <button onClick={SaveChange} className="btn btn-sm my-3 btn-success">Save</button>
+                    <button disabled={loading} onClick={SaveChange} className="btn btn-primary mt-2 w-25">Save</button>
                   </div>
                 </div>
               </div>

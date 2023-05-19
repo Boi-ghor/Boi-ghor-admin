@@ -51,12 +51,14 @@ const AllPublishers = () => {
              .then(data=>{
 
               if(data?.data?.success){
+
+                toast.success("deleted")
                 window.location.reload()
               }else{
-                  setError("this publisher have a book or something wrong")
+                  toast.error("this publisher have a book or something wrong")
               }
              })
-             .catch(e=> console.log(e))
+             .catch(e=> toast(e.message))
          }
 
 

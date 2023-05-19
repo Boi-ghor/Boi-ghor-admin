@@ -9,7 +9,9 @@ import {useNavigate, useParams} from "react-router-dom";
 
 const updateAuthor = () => {
   const navigate=useNavigate()
-  const [auth,setAuth]=useAuth()
+  const [auth,setAuth]=useAuth();
+  const [loading ,setLoading]=useState(false);
+  const [data,setData]=useState({})
   const [name, setName] = useState("")
   const [description, setDescription] = useState('')
   const [image, setImage] = useState(null);
@@ -17,20 +19,19 @@ const updateAuthor = () => {
   const fileInput = useRef(null);
 
   let { id } = useParams();
-  
+
 
   useEffect(()=>{
     LoadAuthorData()
    },[])
- 
+
 
 const LoadAuthorData=async()=>{
 
- 
+
 const {data}=await axios.get(`/authors/${id}`)
-console.log(data.data.authorName)
-setName(data.data.authorName);
-setDescription(data.data.aboutAuthor);
+setData(data.data)
+
 setPreviewURL(data.data.photoURL);
 setImage(data.data.photoURL);
 
@@ -53,11 +54,12 @@ setImage(data.data.photoURL);
 
 
   const SaveChange = async (e) => {
+    setLoading(true)
     e.preventDefault()
     const formData = new FormData();
-    formData.append('authorName',name);
-    formData.append('photo',image);
-    formData.append('aboutAuthor',description);
+    formData.append('authorName',name || data.authorName);
+    formData.append('photo',data.photoURL);
+    formData.append('aboutAuthor',description || data.aboutAuthor);
 
 
     try {
@@ -65,6 +67,7 @@ setImage(data.data.photoURL);
 
       if (!name && !image) {
         toast.error('Name or image required');
+        setLoading(false)
       }
 
 
@@ -73,22 +76,34 @@ setImage(data.data.photoURL);
        if(auth?.token){
          axios.post(`/updateAuthor/${id}`,formData).then(data=> {
            if(data?.data?.data){
-             console.log(data)
+             setLoading(false)
+             toast.success("update successfully")
              navigate('/all-author')
+           }else{
+             setLoading(false);
+             toast.error("failed")
            }
-         }).catch(e=> console.log(e))
+         }).catch(e=> {
+           setLoading(false);
+           toast.error("failed")
+         })
        }
 
       }
 
     }
-    catch (error) { }
+    catch (error) {
+      setLoading(false)
+      toast.error("failed")
+    }
 
   }
 
   return (
     <>
      <div className="container-fluid">
+       {loading ? <div className="spinner-border" role="status">
+       </div> : ""}
         <div className="row">
           <div className="col-12">
             <div className="card">
@@ -116,7 +131,7 @@ setImage(data.data.photoURL);
                     <label className="form-label">Author Name</label>
                     <input
                       className="form-control form-control-sm" type="text"
-                      value={name}
+                     defaultValue={data?.authorName}
                       onChange={(e) => setName(e.target.value)}
 
                     />
@@ -147,7 +162,7 @@ setImage(data.data.photoURL);
                   <div className="col-12 p-2">
                     <label className="form-label">Description</label>
                     <textarea className="form-control form-control-sm"
-                      value={description}
+                              defaultValue={data?.aboutAuthor}
                       onChange={(e) => setDescription(e.target.value)}
 
                       rows={4} />
@@ -155,9 +170,10 @@ setImage(data.data.photoURL);
                 </div>
                 <div className="row">
                   <div className="col-4 p-2">
-                    <button 
+                    <button
+                      disabled={loading}
                     onClick={SaveChange}
-                     className="btn btn-sm my-3 btn-success">Save</button>
+                     className="btn w-25 my-3 btn-primary">Save</button>
                   </div>
                 </div>
               </div>

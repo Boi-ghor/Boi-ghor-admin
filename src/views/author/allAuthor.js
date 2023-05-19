@@ -39,7 +39,7 @@ const AllAuthor = () => {
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.isConfirmed) {
-           
+
           const data={
               authorName
           }
@@ -48,16 +48,16 @@ const AllAuthor = () => {
              .then(data=>{
 
               if(data?.data?.success){
-                toast.success("Author Delete Sucess")
+                toast.success("Author Delete Sucessfully")
                 window.location.reload()
-                
+
 
               }else{
                 toast.error("This Author have a book or something wrong")
                   //setError("this Author have a book or something wrong")
               }
              })
-             .catch(e=> console.log(e))
+             .catch(e=> toast.error(e.message))
          }
 
 
@@ -68,11 +68,11 @@ const AllAuthor = () => {
     })
 
 }
-  
+
 const EditAuthor=async(id)=>{
 
   navigate("/all-author/"+id)
-  
+
   }
 
   return (

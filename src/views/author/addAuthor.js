@@ -2,9 +2,11 @@ import React, { useRef, useState } from 'react'
 import {useNavigate}from 'react-router-dom'
 import {useAuth} from "../../components/context/auth";
 import axios from "axios";
+import {toast} from "react-toastify";
 
 const addAuthor = () => {
   const navigate=useNavigate()
+  const [loading,setLoading]=useState(false)
   const [auth,setAuth]=useAuth()
   const [name, setName] = useState("")
   const [description, setDescription] = useState('')
@@ -27,6 +29,7 @@ const addAuthor = () => {
 
   const SaveChange = async (e) => {
     e.preventDefault()
+    setLoading(true)
     const formData = new FormData();
     formData.append('authorName',name);
     formData.append('photo', image);
@@ -37,6 +40,7 @@ const addAuthor = () => {
 
 
       if (!name && !image) {
+        setLoading(false)
         alert('Name or image required');
       }
 
@@ -46,22 +50,35 @@ const addAuthor = () => {
        if(auth?.token){
          axios.post('/createAuthor',formData).then(data=> {
            if(data?.data?.data){
-             console.log(data)
-             navigate('/all-author')
+             setLoading(false)
+             toast.success("create successfully")
+             navigate('/all-author');
+             window.location.reload()
+           }else{
+             setLoading(false)
+             toast.error("cannot created")
            }
-         }).catch(e=> console.log(e))
+         }).catch(e=> {
+           toast.error("failed")
+           setLoading(false)
+         })
        }
 
       }
 
     }
-    catch (error) { }
+    catch (error) {
+      setLoading(false)
+      toast.error("failed")
+    }
 
   }
 
   return (
     <>
      <div className="container-fluid">
+       {loading ? <div className="spinner-border" role="status">
+       </div> : ""}
         <div className="row">
           <div className="col-12">
             <div className="card">
@@ -128,7 +145,7 @@ const addAuthor = () => {
                 </div>
                 <div className="row">
                   <div className="col-4 p-2">
-                    <button onClick={SaveChange} className="btn btn-sm my-3 btn-success">Save</button>
+                    <button disabled={loading} onClick={SaveChange} className="btn w-25 my-3 btn-primary">Save</button>
                   </div>
                 </div>
               </div>

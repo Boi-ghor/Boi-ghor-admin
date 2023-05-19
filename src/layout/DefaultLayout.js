@@ -9,17 +9,13 @@ const Login =React.lazy(()=> import('../views/page/login'))
 const DefaultLayout = () => {
   const navigate=useNavigate()
   const [ok,setOk]=useState(false)
-  const [auth,setAuth]=useAuth()
-  useEffect(()=>{
-    if(auth.token){
+  const [auth,setAuth]=useAuth();
 
-      setOk(true)
 
-    }else(setOk(false))
-  },[auth])
-  if(!ok) {
-    return navigate('/login')
-  }else{
+  console.log(ok)
+  if(!auth?.token) {
+  return   window.location.href="/#/login"
+  }
   return (
     <div>
 
@@ -33,6 +29,6 @@ const DefaultLayout = () => {
 
     </div>
   )
-}}
+}
 
 export default DefaultLayout

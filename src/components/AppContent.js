@@ -4,9 +4,11 @@ import { CContainer, CSpinner } from '@coreui/react'
 
 // routes config
 import routes from '../routes'
+import {useAuth} from "./context/auth";
 
 const AppContent = () => {
   const [ok,setOk]=useState(true)
+  const [auth]=useAuth()
   return (
     <CContainer lg>
       <Suspense fallback={<CSpinner color="primary" />}>
@@ -24,7 +26,7 @@ const AppContent = () => {
               )
             )
           })}
-          <Route path="/" element={<Navigate to= '/dashboard' replace />} />
+          <Route path="/" element={<Navigate to="/dashboard"  replace />} />
 
         </Routes>
       </Suspense>

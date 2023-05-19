@@ -33,7 +33,7 @@ const Category = () => {
      }
 
 
-/// update nAME WORKING  
+/// update nAME WORKING
 //PHOTO UPDATE NOT WORK
  const Submit = async (e) => {
           e.preventDefault();
@@ -54,7 +54,7 @@ const Category = () => {
                     if(data?.status===201){
 
                         setLoading(false)
-                        
+
                       navigate('/all-category')
                       window.location.reload()
                     }else{
@@ -76,6 +76,8 @@ const Category = () => {
      return (
 
             <div className="container">
+              {loading ? <div className="spinner-border" role="status">
+              </div> : ""}
                <div className="row card p-3">
                     <h3 className='p-3 mt-2 mb-2 h4'> Add Category</h3>
                     <p className={'text-danger'}>{error}</p>

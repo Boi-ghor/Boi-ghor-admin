@@ -35,8 +35,8 @@ const Login = () => {
         setLoading(false)
         localStorage.setItem("auth", JSON.stringify(data));
         setAuth({ ...auth, token: data.token, user: data.user });
-        navigate('/')
-        console.log("success")
+       navigate('/')
+        toast.success("success")
       }else if(data?.message){
         setLoading(false)
         alert('email or password not match')
