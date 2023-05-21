@@ -12,7 +12,8 @@ import {toast} from "react-toastify";
 const addBook = () => {
 
   const navigate=useNavigate();
-const [auth]=useAuth()
+const [auth]=useAuth();
+
   const[categories]=useCategory();
   const [authors]=useAuthor();
   const [publishers]=usePublisher()
@@ -24,8 +25,8 @@ const [auth]=useAuth()
      const [selectedImage, setSelectedImage] = useState(null);
      const fileInput = useRef(null);
 
-     const [name,setName]=useState("") 
-     const [price,setPrice]=useState("") 
+     const [name,setName]=useState("")
+     const [price,setPrice]=useState("")
 
      const [quantity,setQuantity]=useState("")
      const [author,setAuthor]=useState("")
@@ -94,11 +95,12 @@ const [auth]=useAuth()
                     const data=await axios.post('/create-book',formData)
                    if(data.status===200 ){
                      setLoading(false)
-
+                      toast.success("book create successfully")
                      navigate('/all-book');
                      window.location.reload()
 
                    }else{
+                     toast.error("")
                     setLoading(false)
 
                    }
@@ -109,7 +111,8 @@ const [auth]=useAuth()
 
 
           } catch (err) {
-               console.log(err);
+               toast.error(err.message);
+            setLoading(false)
 
           }
      }
@@ -117,7 +120,7 @@ const [auth]=useAuth()
      return (
           <div className='container'>
             {loading && <div className="spinner-border text-dark" role="status">
-              <span className="sr-only">Loading</span>
+
             </div>}
                <div className="row">
 

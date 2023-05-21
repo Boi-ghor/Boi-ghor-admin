@@ -78,6 +78,8 @@ const EditAuthor=async(id)=>{
   return (
     <div>
       <div className="card border-0 shadow-sm">
+        {author.length ===0 ? <div className="spinner-border" role="status">
+        </div> : ""}
         <div className="card-body">
           <h6 className="card-title">All Authors</h6>
           <div className="my-3 d-flex">

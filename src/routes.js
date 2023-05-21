@@ -2,6 +2,7 @@ import React from 'react'
 import updateAuthor from './views/author/updateAuthor'
 import updatePublisher from './views/publisher/updatePublisher'
 import updateCategory from './views/category/updateCategory'
+import updateBook from "./views/Book/updateBook";
 const AllPublishers =React.lazy(()=> import('./views/publisher/allPublisher'))
 const AllAuthor =React.lazy(()=> import('./views/author/allAuthor'))
 const AllBooks =React.lazy(()=> import('./views/Book/allBook'))
@@ -39,6 +40,7 @@ const routes = [
   {path:"/all-category", name:"All Category",element:AllCategory},
   {path:"/all-category/:id",element:updateCategory},
   {path:"/all-book", name:"All Books",element:AllBooks},
+  {path:"/books/:slug", name:"single books",element:updateBook},
 ]
 
 export default routes

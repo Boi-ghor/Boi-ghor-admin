@@ -74,6 +74,8 @@ const AllPublishers = () => {
   return (
     <div>
       <div className="card border-0 shadow-sm">
+        {publisher.length ===0 ? <div className="spinner-border" role="status">
+        </div> : ""}
         <div className="card-body">
           <h6 className="card-title">All Publishers</h6>
           <p className={'text-danger'}>{error}</p>
