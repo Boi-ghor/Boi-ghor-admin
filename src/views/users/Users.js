@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   CBadge,
   CButton,
@@ -12,41 +12,66 @@ import {
 } from "@coreui/react";
 import {FiEdit} from "react-icons/fi";
 import {RiDeleteBin5Fill} from "react-icons/ri";
-const users=[
-  {
-    name:"sohan",
-    email:"sohan@gmail.com",
-    role:'user',
-    gems:12
-  },
-  {
-    name:"sumit",
-    email:"shakil@gmail.com",
-    role:'user',
-    gems:15
-  },
-  {
-    name:"dip",
-    email:"dip@gmail.com",
-    role:'user',
-    gems:12
-  },
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+// const users=[
+//   {
+//     name:"sohan",
+//     email:"sohan@gmail.com",
+//     role:'user',
+//     gems:12
+//   },
+//   {
+//     name:"sumit",
+//     email:"shakil@gmail.com",
+//     role:'user',
+//     gems:15
+//   },
+//   {
+//     name:"dip",
+//     email:"dip@gmail.com",
+//     role:'user',
+//     gems:12
+//   },
 
 
-  {
-    name:"minhaj",
-    email:"sohan@gmail.com",
-    role:'user',
-    gems:12
-  },
-  {
-    name:"fahim",
-    email:"sohan@gmail.com",
-    role:'admin',
-    gems:12
-  },
-]
+//   {
+//     name:"minhaj",
+//     email:"sohan@gmail.com",
+//     role:'user',
+//     gems:12
+//   },
+//   {
+//     name:"fahim",
+//     email:"sohan@gmail.com",
+//     role:'admin',
+//     gems:12
+//   },
+// ]
+
 const Users = () => {
+
+  const [users,SetUsers]=useState()
+
+  const navigate=useNavigate()
+
+  useEffect(()=>{
+    AllUsers()
+  },[])
+
+  const AllUsers=async()=>{
+
+    try{
+      const {data}=await axios.get("/getUsers")
+
+      SetUsers(data.data)
+    
+    
+    }
+    catch(error){}
+  }
+
+ 
   return (
     <div>
       <div className="card border-0 shadow-sm">
@@ -81,17 +106,19 @@ const Users = () => {
             </CTableHead>
 
             <CTableBody>
-              {users.map((user,key)=>{
+              
+              {users?.map((user,key)=>{
                 return <CTableRow>
                   <CTableDataCell style={{ fontSize: '14px', color: '#8E98AA' }}>{key+1}</CTableDataCell>
-                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}> {user.name}</CTableDataCell>
+                  <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}> {user.firstName}</CTableDataCell>
                   <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}>{user.email}</CTableDataCell>
                   <CTableDataCell style={{ fontSize: '14px', color: '#57606f' }}> <CBadge style={{ backgroundColor:'#34495e'}}>{user.role}</CBadge> </CTableDataCell>
 
                   <CTableDataCell className="d-flex align-items-center  justify-content-center w-full">
 
                     <CButton
-                      // onClick={() => onDelete(blog?.blogID)}
+                     
+                     onClick={() => navigate(`/all-user/${user?._id}`)}
                       className=" border-0 cursor-pointer me-2 delete_btn_hover"
                       style={{ color: '#ecf0f1',backgroundColor:"#20bf6b" }}
                     >
