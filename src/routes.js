@@ -3,6 +3,7 @@ import updateAuthor from './views/author/updateAuthor'
 import updatePublisher from './views/publisher/updatePublisher'
 import updateCategory from './views/category/updateCategory'
 import updateBook from "./views/Book/updateBook";
+import UpdateUser from './views/users/UpdateUser';
 const AllPublishers =React.lazy(()=> import('./views/publisher/allPublisher'))
 const AllAuthor =React.lazy(()=> import('./views/author/allAuthor'))
 const AllBooks =React.lazy(()=> import('./views/Book/allBook'))
@@ -27,6 +28,7 @@ const routes = [
   { path: '/allblog', name: 'All Blog', element: AllBlog },
   { path: '/settings', name: 'settings', element:  Settings},
   { path: '/all-user', name: 'All User', element: Users },
+  { path: '/all-user/:id', element: UpdateUser },
   { path: '/teacher', name: 'Add Teacher', element: Teacher },
   { path: '/teacherdetails', name: 'Teacher Details', element: TeacherDetails },
   { path: '/create-category', name: 'addcategory', element:  Category},
