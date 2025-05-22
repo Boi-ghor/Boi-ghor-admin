@@ -93,12 +93,12 @@ const Dashboard = () => {
       user: {
         name: 'Yiorgos Avraamu',
         new: true,
-        registered: 'Jan 1, 2021',
+        registered: 'Jan 1, 2025',
       },
       country: { name: 'USA', flag: cifUs },
       usage: {
         value: 50,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
+        period: 'Jun 11, 2025 - Jul 10, 2025',
         color: 'success',
       },
       payment: { name: 'Mastercard', icon: cibCcMastercard },
@@ -109,12 +109,12 @@ const Dashboard = () => {
       user: {
         name: 'Avram Tarasios',
         new: false,
-        registered: 'Jan 1, 2021',
+        registered: 'Jan 1, 2025',
       },
       country: { name: 'Brazil', flag: cifBr },
       usage: {
         value: 22,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
+        period: 'Jun 11, 2025 - Jul 10, 2025',
         color: 'info',
       },
       payment: { name: 'Visa', icon: cibCcVisa },
@@ -122,11 +122,11 @@ const Dashboard = () => {
     },
     {
       avatar: { src: avatar3, status: 'warning' },
-      user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2021' },
+      user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2025' },
       country: { name: 'India', flag: cifIn },
       usage: {
         value: 74,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
+        period: 'Jun 11, 2025 - Jul 10, 2025',
         color: 'warning',
       },
       payment: { name: 'Stripe', icon: cibCcStripe },
@@ -134,11 +134,11 @@ const Dashboard = () => {
     },
     {
       avatar: { src: avatar4, status: 'secondary' },
-      user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2021' },
+      user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2025' },
       country: { name: 'France', flag: cifFr },
       usage: {
         value: 98,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
+        period: 'Jun 11, 2025 - Jul 10, 2025',
         color: 'danger',
       },
       payment: { name: 'PayPal', icon: cibCcPaypal },
@@ -149,12 +149,12 @@ const Dashboard = () => {
       user: {
         name: 'Agapetus Tadeáš',
         new: true,
-        registered: 'Jan 1, 2021',
+        registered: 'Jan 1, 2025',
       },
       country: { name: 'Spain', flag: cifEs },
       usage: {
         value: 22,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
+        period: 'Jun 11, 2025 - Jul 10, 2025',
         color: 'primary',
       },
       payment: { name: 'Google Wallet', icon: cibCcApplePay },
@@ -165,12 +165,12 @@ const Dashboard = () => {
       user: {
         name: 'Friderik Dávid',
         new: true,
-        registered: 'Jan 1, 2021',
+        registered: 'Jan 1, 2025',
       },
       country: { name: 'Poland', flag: cifPl },
       usage: {
         value: 43,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
+        period: 'Jun 11, 2025 - Jul 10, 2025',
         color: 'success',
       },
       payment: { name: 'Amex', icon: cibCcAmex },
@@ -188,7 +188,7 @@ const Dashboard = () => {
               <h4 id="traffic" className="card-title mb-0">
                 Traffic
               </h4>
-              <div className="small text-medium-emphasis">January - July 2021</div>
+              <div className="small text-medium-emphasis">January - July 2025</div>
             </CCol>
             <CCol sm={7} className="d-none d-md-block">
               <CButton color="primary" className="float-end">
